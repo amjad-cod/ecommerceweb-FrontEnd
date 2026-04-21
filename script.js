@@ -2033,3 +2033,4 @@
 
         // Expose to window for debugging
         window.app = app;
+    
