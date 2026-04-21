@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusShop - Premium E-Commerce Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="container flex flex-between">
+                <span>Free shipping on orders over $50 | Use code: FREESHIP</span>
+                <div class="flex" style="gap: 1.5rem;">
+                    <a href="#" onclick="app.navigate('track')" style="color: white; text-decoration: none;">Track Order</a>
+                    <a href="#" onclick="app.navigate('support')" style="color: white; text-decoration: none;">Help Center</a>
+                </div>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container flex flex-between">
+                <button class="mobile-menu-btn" onclick="app.toggleMobileMenu()">☰</button>
+                <a href="#" class="logo" onclick="app.navigate('home')">
+                    <span>⚡</span>
+                    NexusShop
+                </a>
+                
+                <div class="search-container">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search products, brands, categories..." autocomplete="off">
+                    <div class="search-suggestions" id="searchSuggestions"></div>
+                </div>
+
+                <div class="header-actions">
+                    <button class="icon-btn" onclick="app.toggleWishlist()" title="Wishlist">
+                        ♥
+                        <span class="badge" id="wishlistCount">0</span>
+                    </button>
+                    <button class="icon-btn" onclick="app.toggleCart()" title="Cart">
+                        🛒
+                        <span class="badge" id="cartCount">0</span>
+                    </button>
+                    <button class="icon-btn" onclick="app.navigate('account')" title="Account">
+                        👤
+                    </button>
+                    <button class="icon-btn" onclick="app.navigate('admin')" title="Admin" id="adminBtn" style="display:none;">
+                        ⚙️
+                    </button>
+                </div>
+            </div>
+        </div>
+        <nav class="nav">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active" onclick="app.navigate('home')">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="app.filterCategory('electronics')">Electronics</a>
+                        <div class="mega-menu">
+                            <div class="mega-column">
+                                <h4>Computers</h4>
+                                <a href="#" onclick="app.filterCategory('laptops')">Laptops</a>
+                                <a href="#" onclick="app.filterCategory('desktops')">Desktops</a>
+                                <a href="#" onclick="app.filterCategory('accessories')">Accessories</a>
+                            </div>
+                            <div class="mega-column">
+                                <h4>Mobile</h4>
+                                <a href="#" onclick="app.filterCategory('smartphones')">Smartphones</a>
+                                <a href="#" onclick="app.filterCategory('tablets')">Tablets</a>
+                                <a href="#" onclick="app.filterCategory('wearables')">Wearables</a>
+                            </div>
+                            <div class="mega-column">
+                                <h4>Audio</h4>
+                                <a href="#" onclick="app.filterCategory('headphones')">Headphones</a>
+                                <a href="#" onclick="app.filterCategory('speakers')">Speakers</a>
+                                <a href="#" onclick="app.filterCategory('microphones')">Microphones</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="app.filterCategory('fashion')">Fashion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="app.filterCategory('home')">Home & Living</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="app.filterCategory('sports')">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="app.navigate('deals')">Deals</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="app.navigate('new')">New Arrivals</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-nav-overlay" id="mobileOverlay" onclick="app.toggleMobileMenu()"></div>
+    <div class="mobile-nav" id="mobileNav">
+        <div style="padding: 1.5rem; border-bottom: 1px solid var(--light); display: flex; justify-content: space-between; align-items: center;">
+            <span class="logo">NexusShop</span>
+            <button onclick="app.toggleMobileMenu()" style="background: none; border: none; font-size: 1.5rem;">✕</button>
+        </div>
+        <ul style="list-style: none; padding: 1rem 0;">
+            <li><a href="#" onclick="app.navigate('home'); app.toggleMobileMenu()" style="display: block; padding: 1rem 1.5rem; text-decoration: none; color: var(--dark);">Home</a></li>
+            <li><a href="#" onclick="app.filterCategory('electronics'); app.toggleMobileMenu()" style="display: block; padding: 1rem 1.5rem; text-decoration: none; color: var(--dark);">Electronics</a></li>
+            <li><a href="#" onclick="app.filterCategory('fashion'); app.toggleMobileMenu()" style="display: block; padding: 1rem 1.5rem; text-decoration: none; color: var(--dark);">Fashion</a></li>
+            <li><a href="#" onclick="app.navigate('account'); app.toggleMobileMenu()" style="display: block; padding: 1rem 1.5rem; text-decoration: none; color: var(--dark);">My Account</a></li>
+            <li><a href="#" onclick="app.navigate('orders'); app.toggleMobileMenu()" style="display: block; padding: 1rem 1.5rem; text-decoration: none; color: var(--dark);">My Orders</a></li>
+            <li><a href="#" onclick="app.navigate('support'); app.toggleMobileMenu()" style="display: block; padding: 1rem 1.5rem; text-decoration: none; color: var(--dark);">Customer Support</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content Area -->
+    <main id="mainContent">
+        <!-- Dynamic content rendered here -->4-01-15",
+                        total: 299.99,
+                        status: "delivered",
+                        items: [{ name: "Wireless Noise-Canceling Headphones", qty: 1 }],
+                        tracking: [
+                            { status: "Order Placed", date: "2024-01-15 09:30", completed: true },
+                            { status: "Processing", date: "2024-01-15 14:00", completed: true },
+                            { status: "Shipped", date: "2024-01-16 10:00", completed: true },
+                            { status: "Out for Delivery", date: "2024-01-18 08:00", completed: true },
+                            { status: "Delivered", date: "2Pro", qty: 1 }],
+    </main>
+
+    <!-- Cart Sidebar -->
+    <div class="side-panel" id="cartPanel">
+        <div class="panel-header">
+            <h3>Shopping Cart</h3>
+            <button onclick="app.toggleCart()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
+        </div>
+        <div class="panel-body" id="cartItems">
+            <!-- Cart items rendered here -->
+        </div>
+        <div class="panel-footer">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 1.25rem; font-weight: 700;">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="btn btn-primary" style="width: 100%;" onclick="app.navigate('checkout')">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Wishlist Sidebar -->
+    <div class="side-panel" id="wishlistPanel" style="right: -450px;">
+        <div class="panel-header">
+            <h3>My Wishlist</h3>
+            <button onclick="app.toggleWishlist()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
+        </div>
+        <div class="panel-body" id="wishlistItems">
+            <!-- Wishlist items rendered here -->
+        </div>
+    </div>
+
+    <!-- Chatbot -->
+    <div class="chatbot-widget">
+        <div class="chatbot-window" id="chatWindow">
+            <div class="chat-header">
+                <div>
+                    <div style="font-weight: 600;">Nexus Assistant</div>
+                    <div style="font-size: 0.75rem; opacity: 0.8;">Online</div>
+                </div>
+                <button onclick="app.toggleChat()" style="background: none; border: none; color: white; font-size: 1.25rem; cursor: pointer;">✕</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-message bot">Hello! I'm your Nexus assistant. How can I help you today?</div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Type your message..." onkeypress="if(event.key==='Enter') app.sendMessage()">
+                <button onclick="app.sendMessage()" style="background: var(--primary); color: white; border: none; padding: 0.75rem 1rem; border-radius: var(--radius); cursor: pointer;">➤</button>
+            </div>
+        </div>
+        <button class="chatbot-btn" onclic4-01-15",
+                        total: 299.99,
+                        status: "delivered",
+                        items: [{ name: "Wireless Noise-Canceling Headphones", qty: 1 }],
+                        tracking: [
+                            { status: "Order Placed", date: "2024-01-15 09:30", completed: true },
+                            { status: "Processing", date: "2024-01-15 14:00", completed: true },
+                            { status: "Shipped", date: "2024-01-16 10:00", completed: true },
+                            { status: "Out for Delivery", date: "2024-01-18 08:00", completed: true },
+                            { status: "Delivered", date: "2Pro", qty: 1 }],k="app.toggleChat()">💬</button>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer"></div>
+
+    <!-- Login Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Welcome Back</h2>
+                <button class="close-modal" onclick="app.closeModal('loginModal')">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="social-login">
+                    <button class="social-btn" onclick="app.socialLogin('google')">
+                        <span>🔍</span> Continue with Google
+                    </button>
+                    <button class="social-btn" onclick="app.socialLogin('facebook')">
+                        <span>📘</span> Continue with Facebook
+                    </button>
+                </div>
+                <div style="text-align: center; margin: 1rem 0; color: var(--gray);">or</div>
+                <form onsubmit="app.login(event)">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" required placeholder="you@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+                </form>
+                <p style="text-align: center; margin-top: 1rem; font-size: 0.875rem;">
+                    Don't have an account? <a href="#" style="color: var(--primary);">Sign up</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid grid">
+                <div>
+                    <h3 class="footer-title">About NexusShop</h3>
+                    <p style="color: #9ca3af; line-height: 1.8;">Your premium destination for quality products. We bring you the best deals with secure shopping experience.</p>
+                    <div class="security-badges" style="justify-content: flex-start; margin: 1rem 0;">
+                        <div class="security-badge">🔒 SSL Secured</div>
+                        <div class="security-badge">✓ Verified</div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="app.navigate('home')">Home</a></li>
+                        <li><a href="#" onclick="app.filterCategory('all')">Shop All</a></li>
+                        <li><a href="#" onclick="app.navigate('deals')">Deals</a></li>
+                        <li><a href="#" onclick="app.navigate('new')">New Arrivals</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">Customer Service</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="app.navigate('account')">My Account</a></li>
+                        <li><a href="#" onclick="app.navigate('orders')">Order Tracking</a></li>
+                        <li><a href="#" onclick="app.navigate('returns')">Returns & Refunds</a></li>
+                        <li><a href="#" onclick="app.navigate('support')">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="footer-title">Policies</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="app.navigate('privacy')">Privacy Policy</a></li>
+                        <li><a href="#" onclick="app.navigate('terms')">Terms of Service</a></li>
+                        <li><a href="#" onclick="app.navigate('shipping')">Shipping Info</a></li>
+                        <li><a href="#" onclick="app.navigate('faq')">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p> NexusShop. All rights reserved. | API-Ready E-Commerce Platform</p>
+            </div>
+        </div>
+    </footer>
+    <script src="app.js"></script>
+             
+</body>
+</html>
